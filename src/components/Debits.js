@@ -23,7 +23,6 @@ const Debits = (props) => {
       date: new Date().toISOString(),
     };
     props.addDebit(newDebit);
-    props.updateBalance(props.accountBalance - newDebit.amount);
     setDescription("");
     setAmount("");
   };
