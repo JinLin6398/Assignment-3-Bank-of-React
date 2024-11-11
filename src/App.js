@@ -28,6 +28,22 @@ class App extends Component {
     };
   }
 
+  // Lifecycle method to fetch debitList data when the component mounts
+  componentDidMount() {
+    // Fetch Debits
+    fetch('https://johnnylaicode.github.io/api/debits.json')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ debitList: data });
+        // Optionally, update account balance based on debits
+        const totalDebits = data.reduce((acc, debit) => acc + debit.amount, 0);
+        this.setState(prevState => ({
+          accountBalance: prevState.accountBalance - totalDebits
+        }));
+      })
+      .catch(error => console.error('Error fetching debits:', error));
+  }
+
   // Update state's currentUser (userName) after "Log In" button is clicked
   mockLogIn = (logInInfo) => {  
     const newUser = {...this.state.currentUser};
@@ -35,10 +51,19 @@ class App extends Component {
     this.setState({currentUser: newUser})
   }
 
-    // Update the account balance - used for Credits
-    updateBalance = (newBalance) => {
-      this.setState({ accountBalance: newBalance });
-    }
+  // Update the account balance - used for Credits
+  updateBalance = (newBalance) => {
+    this.setState({ accountBalance: newBalance });
+  }
+
+
+  // Function to add a new debit transaction
+  addDebit = (newDebit) => {
+    this.setState(prevState => ({
+      debitList: [...prevState.debitList, newDebit],
+      accountBalance: prevState.accountBalance - newDebit.amount
+    }));
+  }
 
   // Create Routes and React elements to be rendered using React components
   render() {  
@@ -54,7 +79,14 @@ class App extends Component {
                updateBalance={this.updateBalance}         // Helps pass updateBalance as a prop (in credits)
       />
     )
-    const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
+    const DebitsComponent = () => (
+      <Debits 
+        debits={this.state.debitList} 
+        addDebit={this.addDebit} // Pass addDebit function as a prop
+        accountBalance={this.state.accountBalance} // Helps pass accountBalance as a prop (in credits)
+        updateBalance={this.updateBalance}         // Helps pass updateBalance as a prop (in credits)
+      />
+    );
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
