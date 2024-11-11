@@ -43,25 +43,38 @@ class LogIn extends Component {
 
     // Render the login form (and call "handleSubmit" method when "Log In" button is clicked to submit form)
     return (
-      <div>
+      <div style={{textAlign: 'center', fontFamily: 'Ariel, sans-serif'}}>
         <h1>Login</h1>
         
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>User Name</label>
-            <input type="text" name="userName" defaultValue={this.props.user.userName} onChange={this.handleChange} />
+          <div style={{marginBottom: '10px'}}>
+            <label style={{fontWeight: 'bold', marginRight: '10px', width: '120px', whiteSpace: 'nowrap'}}>User Name</label>
+              <input type="text" name="userName" defaultValue={this.props.user.userName} onChange={this.handleChange}/>
           </div>
-          <div>
-            <label>Password</label>
-            <input type="password" name="password" />
+
+          <div style={{marginBottom: '10px'}}>
+            <label style={{fontWeight: 'bold', marginRight: '10px', width: '120px', whiteSpace: 'nowrap'}}>Password</label>
+              <input type="password" name="password" />
           </div>
-          <button>Log In</button>
+
+          <button style={buttonStyle}>Log In</button>
         </form>  
         <br/>
-        <Link to="/">Return to Home</Link>
+        <Link to="/" style={{ textDecoration: 'none', color: '#4189bf'}}>Return to Home</Link>
       </div>
     );
   }
 }
+
+const buttonStyle = {
+  padding: '10px 20px',
+  borderRadius: '5px',
+  border: 'none',
+  backgroundColor: '#4189bf',
+  color: 'white',
+  cursor: 'pointer',
+  width: '100%',
+  maxWidth: '300px'
+};
 
 export default LogIn;

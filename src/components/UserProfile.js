@@ -16,7 +16,7 @@ class UserProfile extends Component {
         <div>Username: {this.props.userName}</div>
         <div>Member Since: {this.props.memberSince}</div>
         <br/>
-        <Link to="/">Return to Home</Link>
+        <Link to="/" style={{ textDecoration: 'none', color: '#4189bf'}}>Return to Home</Link>
       </div>
     );
   }
