@@ -52,7 +52,7 @@ const Debits = (props) => {
         </tbody>
         </table>
 
-        <h2>Add a New Credit</h2>
+        <h2>Add a New Debit</h2>
       <form onSubmit={handleAddDebit}>
         <input
           type="text"
