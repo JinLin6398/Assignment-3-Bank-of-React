@@ -73,7 +73,7 @@ const Credits = (props) => {
       </form>
 
       <br />
-      <Link to="/">Return to Home</Link>
+      <Link to="/" style={{ textDecoration: 'none', color: '#4189bf'}}>Return to Home</Link>
     </div>
   );
 };
