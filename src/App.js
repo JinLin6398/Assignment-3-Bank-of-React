@@ -30,6 +30,21 @@ class App extends Component {
 
   // Lifecycle method to fetch debitList data when the component mounts
   componentDidMount() {
+    // Fetch Credits
+    fetch('https://johnnylaicode.github.io/api/credits.json')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ creditList: data });
+      
+      // Calculate total credits and add to account balance
+      const totalCredits = data.reduce((acc, credit) => acc + credit.amount, 0);
+      this.setState(prevState => ({
+        accountBalance: prevState.accountBalance + totalCredits
+      }));
+    })
+    .catch(error => console.error('Error fetching credits:', error));
+
+
     // Fetch Debits
     fetch('https://johnnylaicode.github.io/api/debits.json')
       .then(response => response.json())
@@ -52,8 +67,11 @@ class App extends Component {
   }
 
   // Update the account balance - used for Credits
-  updateBalance = (newBalance) => {
-    this.setState({ accountBalance: newBalance });
+  addCredit = (newCredit) => {
+    this.setState(prevState => ({
+      creditList: [...prevState.creditList, newCredit],
+      accountBalance: prevState.accountBalance + newCredit.amount
+    }));
   }
 
 
@@ -75,16 +93,15 @@ class App extends Component {
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
     const CreditsComponent = () => (
       <Credits credits={this.state.creditList}
+               addCredit={this.addCredit} 
                accountBalance={this.state.accountBalance} // Helps pass accountBalance as a prop (in credits)
-               updateBalance={this.updateBalance}         // Helps pass updateBalance as a prop (in credits)
       />
     )
     const DebitsComponent = () => (
       <Debits 
         debits={this.state.debitList} 
         addDebit={this.addDebit} // Pass addDebit function as a prop
-        accountBalance={this.state.accountBalance} // Helps pass accountBalance as a prop (in credits)
-        updateBalance={this.updateBalance}         // Helps pass updateBalance as a prop (in credits)
+        accountBalance={this.state.accountBalance} // Helps pass accountBalance as a prop (in debits)
       />
     );
 

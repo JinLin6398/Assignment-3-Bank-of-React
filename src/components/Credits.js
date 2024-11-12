@@ -4,40 +4,24 @@ src/components/Credits.js
 The Credits component contains information for Credits page view.
 Note: You need to work on this file for the Assignment.
 ==================================================*/
-import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Credits = (props) => {
-  const [credits, setCredits] = useState([]);
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
 
-  useEffect(() => {
-    // Fetch credits from the API on component mount
-    axios.get('https://johnnylaicode.github.io/api/credits.json')
-      .then(response => setCredits(response.data))
-      .catch(error => console.error("Error fetching credits:", error));
-  }, []);
-
-  const handleAddCredit = () => {
-    if (description && amount) {
-      const newCredit = {
-        description,
-        amount: parseFloat(amount),
-        date: new Date().toISOString(),
-      };
-
-      // Update the credits list with the new credit entry
-      setCredits([...credits, newCredit]);
-
-      // Update the account balance
-      props.updateBalance(props.accountBalance + newCredit.amount);
-
-      // Clear input fields
-      setDescription('');
-      setAmount('');
-    }
+  const handleAddCredit = (event) => {
+    event.preventDefault();
+    const newCredit = {
+      id: Math.random().toString(36).substr(2, 9),
+      description: description,
+      amount: parseFloat(amount),
+      date: new Date().toISOString(),
+    };
+    props.addCredit(newCredit); // Call parent function to add new credit
+    setDescription("");
+    setAmount("");
   };
 
   return (
@@ -54,7 +38,7 @@ const Credits = (props) => {
           </tr>
         </thead>
         <tbody>
-          {credits.map((credit, index) => (
+          {props.credits.map((credit, index) => (
             <tr key={index}>
               <td style={tableDataStyle}>{credit.description}</td>
               <td style={tableDataStyle}>${credit.amount.toFixed(2)}</td>
@@ -66,26 +50,30 @@ const Credits = (props) => {
 
       {/* Add New Credit Form */}
       <h2>Add a New Credit</h2>
-      <div style={{ marginBottom: '20px' }}>
-        <input 
-          type="text" 
-          value={description} 
-          onChange={(e) => setDescription(e.target.value)} 
-          placeholder="Description" 
-          style={inputStyle} 
+      <form onSubmit={handleAddCredit}>
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          style={inputStyle}
+          required
         />
-        <input 
-          type="number" 
-          value={amount} 
-          onChange={(e) => setAmount(e.target.value)} 
-          placeholder="Amount" 
-          style={inputStyle} 
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          style={inputStyle}
+          required
         />
+        <button type="submit" style={buttonStyle}>Add Credit</button>
+      </form>
 
-        <button onClick={handleAddCredit} style={buttonStyle}>Add Credit</button>
-      </div>
-
-      <Link to="/" style={{ textDecoration: 'none', color: '#4189bf'}}>Return to Home</Link>
+      <br />
+      <Link to="/">Return to Home</Link>
     </div>
   );
 };
