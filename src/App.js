@@ -39,7 +39,7 @@ class App extends Component {
       // Calculate total credits and add to account balance
       const totalCredits = data.reduce((acc, credit) => acc + credit.amount, 0);
       this.setState(prevState => ({
-        accountBalance: prevState.accountBalance + totalCredits
+        accountBalance: parseFloat((prevState.accountBalance + totalCredits).toFixed(2))
       }));
     })
     .catch(error => console.error('Error fetching credits:', error));
@@ -53,7 +53,7 @@ class App extends Component {
         // Optionally, update account balance based on debits
         const totalDebits = data.reduce((acc, debit) => acc + debit.amount, 0);
         this.setState(prevState => ({
-          accountBalance: prevState.accountBalance - totalDebits
+          accountBalance: parseFloat((prevState.accountBalance - totalDebits).toFixed(2))
         }));
       })
       .catch(error => console.error('Error fetching debits:', error));
@@ -70,7 +70,7 @@ class App extends Component {
   addCredit = (newCredit) => {
     this.setState(prevState => ({
       creditList: [...prevState.creditList, newCredit],
-      accountBalance: prevState.accountBalance + newCredit.amount
+      accountBalance: parseFloat((prevState.accountBalance + newCredit.amount).toFixed(2))
     }));
   }
 
@@ -79,7 +79,7 @@ class App extends Component {
   addDebit = (newDebit) => {
     this.setState(prevState => ({
       debitList: [...prevState.debitList, newDebit],
-      accountBalance: prevState.accountBalance - newDebit.amount
+      accountBalance: parseFloat((prevState.accountBalance - newDebit.amount).toFixed(2))
     }));
   }
 
@@ -107,7 +107,7 @@ class App extends Component {
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
-      <Router basename="/bank-of-react-starter-code">
+      <Router basename="/Assignment-3-Bank-of-React">
         <div>
           <Route exact path="/" render={HomeComponent}/>
           <Route exact path="/userProfile" render={UserProfileComponent}/>
