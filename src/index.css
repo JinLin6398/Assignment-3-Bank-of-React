@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background-color: rgb(64,111,184);
+  padding: '10px';
+  border: '1px solid #ddd';
+  /* color: rgb(10, 26, 41); */
+  
 }
 
 code {
