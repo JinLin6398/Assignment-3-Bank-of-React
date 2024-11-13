@@ -74,6 +74,7 @@ const imageStyle = {
 };
 
 const mainHomeStyle = {
+  backgroundImage: 'url("../../Assignment-3-Bank-of-React/public/images/lighthousePic.jpg")',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
