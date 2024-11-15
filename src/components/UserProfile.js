@@ -18,7 +18,7 @@ class UserProfile extends Component {
           <br/>
         </div>
         <div style={returnLinkBackgroundStyle}>
-            <Link to="/" style={returnLinkStyle}>Return to Home</Link>
+            <Link to="/" style={returnLinkStyle}><strong>Return to Home</strong></Link>
         </div>
       </div>
     );
@@ -28,8 +28,7 @@ class UserProfile extends Component {
 const returnLinkBackgroundStyle = {
   backgroundColor: '#4189bf',
   borderRadius: '5px',
-  marginLeft: '45%',
-  marginRight: '45%',
+  width: '100px',
   padding: '5px'
 }
 
@@ -50,8 +49,7 @@ const userBoxStyle = {
   justifyContent: 'center',
   alignItems: 'flex-start',
   padding: '20px',
-  marginLeft: '40%',
-  marginRight: '40%',
+  width: '240px',
   marginBottom: '20px'
 }
 
@@ -61,7 +59,9 @@ const userMainStyle = {
   backgroundColor: 'rgb(213, 235, 255)',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '2px'
 }
 
 export default UserProfile;

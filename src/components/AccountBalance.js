@@ -10,7 +10,7 @@ class AccountBalance extends Component {
   render() {
     return (
       <div style={balanceShowStyle}>
-        Balance: {this.props.accountBalance}
+        <strong>Balance:</strong> {this.props.accountBalance}
       </div>
     );
   }
@@ -20,10 +20,10 @@ const balanceShowStyle = {
   display: 'flex',
   flexDirection: 'column',
   color: 'white',
-  padding: '5px',
+  padding: '15px 40px 15px 40px',
   borderRadius: '7px',
-  marginLeft: '44%',
-  marginRight: '44%',
+  marginLeft: '43%',
+  marginRight: '43%',
   backgroundColor: 'rgb(11,29,63)',
   fontSize: '25px',
   textAlign: 'center',
