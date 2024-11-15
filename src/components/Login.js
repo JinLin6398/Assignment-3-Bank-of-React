@@ -43,38 +43,84 @@ class LogIn extends Component {
 
     // Render the login form (and call "handleSubmit" method when "Log In" button is clicked to submit form)
     return (
-      <div style={{textAlign: 'center', fontFamily: 'Ariel, sans-serif'}}>
-        <h1>Login</h1>
-        
-        <form onSubmit={this.handleSubmit}>
-          <div style={{marginBottom: '10px'}}>
-            <label style={{fontWeight: 'bold', marginRight: '10px', width: '120px', whiteSpace: 'nowrap'}}>User Name</label>
+      <div style={loginMainStyle}>
+        <div style={loginBoxStyle}>
+          <h1>Login</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>User Name</label>
               <input type="text" name="userName" defaultValue={this.props.user.userName} onChange={this.handleChange}/>
-          </div>
-
-          <div style={{marginBottom: '10px'}}>
-            <label style={{fontWeight: 'bold', marginRight: '10px', width: '120px', whiteSpace: 'nowrap'}}>Password</label>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Password</label>
               <input type="password" name="password" />
-          </div>
-
-          <button style={buttonStyle}>Log In</button>
-        </form>  
-        <br/>
-        <Link to="/" style={{ textDecoration: 'none', color: '#4189bf'}}>Return to Home</Link>
+            </div>
+            <button style={loginButtonStyle}>Login</button>
+          </form>  
+          <br/>
+          <Link to="/" style={returnButtonStyle}><strong>Return to Home</strong></Link>
+        </div>
       </div>
     );
   }
 }
 
-const buttonStyle = {
+const sectionStyle = {
+  marginBottom: '10px'
+}
+
+const loginButtonStyle = {
+  textDecoration: 'none', 
+  backgroundColor: 'white',
+  color: '#4189bf',
+  width: '80px',
+  height: '30px',
+  border: 'none',
+  cursor: 'pointer',
+  fontSize: '25px'
+}
+
+const labelStyle = {
+  fontWeight: 'bold', 
+  marginRight: '10px', 
+  width: '120px', 
+  whiteSpace: 'nowrap'
+}
+
+const returnButtonStyle = {
+  textDecoration: 'none', 
   padding: '10px 20px',
+  marginLeft: '42px',
   borderRadius: '5px',
   border: 'none',
   backgroundColor: '#4189bf',
   color: 'white',
   cursor: 'pointer',
-  width: '100%',
   maxWidth: '300px'
 };
+
+const loginBoxStyle = {
+  backgroundColor: 'white',
+  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  padding: '20px',
+  width: '240px',
+  marginBottom: '20px'
+}
+
+const loginMainStyle = {
+  height: '100vb',
+  width:  '100vi',
+  backgroundColor: 'rgb(213, 235, 255)',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '2px',
+  fontFamily: 'Ariel, sans-serif'
+}
 
 export default LogIn;

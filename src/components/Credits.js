@@ -25,11 +25,11 @@ const Credits = (props) => {
   };
 
   return (
-    <div style={{ textAlign: 'center', fontFamily: 'Ariel, sans-serif' }}>
+    <div style={pageStyle}>
       <h1> Account Balance: ${props.accountBalance.toFixed(2)} </h1>
 
       {/* Credits Table */}
-      <table style={{ margin: '20px auto', borderCollapse: 'collapse', width: '80%' }}>
+      <table style={tableStyle}>
         <thead>
           <tr>
             <th style={tableHeaderStyle}>Description</th>
@@ -41,7 +41,7 @@ const Credits = (props) => {
           {props.credits.map((credit, index) => (
             <tr key={index}>
               <td style={tableDataStyle}>{credit.description}</td>
-              <td style={tableDataStyle}>${credit.amount.toFixed(2)}</td>
+              <td style={tableDataStyleCredit}>${credit.amount.toFixed(2)}</td>
               <td style={tableDataStyle}>{new Date(credit.date).toLocaleDateString()}</td>
             </tr>
           ))}
@@ -73,23 +73,29 @@ const Credits = (props) => {
       </form>
 
       <br />
-      <Link to="/" style={{ textDecoration: 'none', color: '#4189bf'}}>Return to Home</Link>
+      <Link to="/" style={returnButtonStyle}>Return to Home</Link>
     </div>
   );
 };
 
-// Visual Elements
 const tableHeaderStyle = {
   backgroundColor: '#4189bf',
   color: 'white',
   padding: '10px',
-  border: '1px solid #ddd',
+  border: '1px solid #cc',
 };
 
 const tableDataStyle = {
   padding: '10px',
-  border: '1px solid #ddd',
+  borderBottom: '2px solid #ccc',
   textAlign: 'center',
+};
+
+const tableDataStyleCredit = {
+  padding: '10px',
+  borderBottom: '2px solid #ccc',
+  textAlign: 'center',
+  backgroundColor: '#a1d6b2'
 };
 
 const inputStyle = {
@@ -107,5 +113,36 @@ const buttonStyle = {
   color: 'white',
   cursor: 'pointer',
 };
+
+const tableStyle = {
+  margin: '20px auto',
+  borderLeft: '0px solid #ddd',
+  borderRight: '0px solid #ccc', 
+  borderCollapse: 'collapse', 
+  width: '80%',
+}
+
+const returnButtonStyle = {
+  textDecoration: 'none', 
+  padding: '10px 20px',
+  marginLeft: '42px',
+  borderRadius: '5px',
+  border: 'none',
+  backgroundColor: '#4189bf',
+  color: 'white',
+  cursor: 'pointer',
+  maxWidth: '300px'
+};
+
+const pageStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100vb',
+  width:  '100vi',
+  backgroundColor: 'rgb(213, 235, 255)',
+  textAlign: 'center',
+  alignItems: 'center', 
+  fontFamily: 'Ariel, sans-serif'
+}
 
 export default Credits;
